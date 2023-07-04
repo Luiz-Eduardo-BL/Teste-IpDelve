@@ -5,7 +5,7 @@ export default function SignupPage() {
   return (
     <>
       <Header
-        heading="Create your account"
+        heading="Crie sua conta"
         paragraph="Já possui uma conta? "
         linkName="Login"
         linkUrl="/"

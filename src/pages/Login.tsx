@@ -5,7 +5,7 @@ export default function LoginPage() {
   return (
     <>
       <Header 
-        heading="Login to your account"
+        heading="Fazer login na sua conta"
         paragraph="Não possui uma conta? "
         linkName="Inscrever-se aqui"
         linkUrl="/signup"
