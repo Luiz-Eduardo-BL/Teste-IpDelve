@@ -6,9 +6,9 @@ export default function FormExtra() {
           id="Lembrar-se de mim"
           name="Lembrar-se de mim"
           type="checkbox"
-          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-w-300 rounded"
         />
-        <label htmlFor="Lembrar-se de mim" className="ml-2 block text-sm text-gray-900">
+        <label htmlFor="Lembrar-se de mim" className="ml-2 block text-sm text-w-900">
         Lembrar-se de mim
         </label>
     </div>
