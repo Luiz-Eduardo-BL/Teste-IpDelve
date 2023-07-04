@@ -12,7 +12,7 @@ export default function Header({
         <img
           alt=""
           className="h-14 w-14"
-          src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" 
+          src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
         />
       </div>
       <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
