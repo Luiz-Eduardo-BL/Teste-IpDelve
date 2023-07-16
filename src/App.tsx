@@ -1,6 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignupPage from './pages/Signup';
+
+import HomePage from "./pages/Home";
 import LoginPage from './pages/Login';
+import SignupPage from './pages/Signup';
+import ActivatePage from "./pages/Activate";
+import ResetPasswordPage from "./pages/ResetPassword";
+import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirm";
 
 
 function App() {
@@ -9,8 +14,12 @@ function App() {
       <div className="w-full max-w-md px-4">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/users/activate/:uid/:token" element={<ActivatePage />} />
+            <Route path="/users/reset_password/" element={<ResetPasswordPage />} />
+            <Route path="/users/reset_password_confirm/:uid/:token" element={<ResetPasswordConfirmPage />} />
           </Routes>
         </BrowserRouter>
       </div>
