@@ -1,51 +1,54 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { createUser } from "../environment/api";
 import { signupFields } from "../constants/formFields";
 import Input from "./Input";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 
-const fields = signupFields;
-const fieldsState = {} as { [key: string]: string };
-fields.forEach((field) => (fieldsState[field.id] = ""));
-
 export default function Signup() {
-  const [signupState, setSignupState] = useState(fieldsState);
-  const history = useNavigate();
+  const [userData, setUserData] = useState({
+    email: "",
+    name: "",
+    password: "",
+    re_password: "",
+  });
 
-  const handleChange = (e: { target: { id: any; value: any } }) => {
-    setSignupState({ ...signupState, [e.target.id]: e.target.value });
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post("/api/signup/", {
-        username: signupState.username,
-        email: signupState.email,
-        password: signupState.password,
-      });
-      const token = response.data.access;
-      const user = response.data;
-      console.log("Novo usuário criado:", user);
-      // Armazene o token JWT no armazenamento local (localStorage) ou em algum estado global, se necessário
-      // Exemplo: localStorage.setItem("token", token);
+  const navigate = useNavigate();
 
-      // Redirecione o usuário para a página protegida
-      history("/");
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    try {
+      const response = await createUser(userData);
+      console.log(response);
+      navigate("/login");
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
+  const signupState = {
+    email: userData.email,
+    name: userData.name,
+    password: userData.password,
+    re_password: userData.re_password,
+  };
+
+  const fields = signupFields;
+
   return (
-    <form className="mt-8 space-y-6 ">
+    <form className="mt-8 space-y-6">
       <div className="rounded-md shadow-sm -space-y-px">
         {fields.map((field) => (
           <Input
             key={field.id}
             handleChange={handleChange}
-            value={signupState[field.id]}
+            value={signupState[field.name]}
             labelText={field.labelText}
             labelFor={field.labelFor}
             id={field.id}

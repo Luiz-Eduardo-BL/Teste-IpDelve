@@ -4,7 +4,9 @@ import HomePage from "./pages/Home";
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
 import ActivatePage from "./pages/Activate";
+import Success from "./pages/Success";
 import ResetPasswordPage from "./pages/ResetPassword";
+import RequestResetPasswordPage from "./pages/RequestResetPassword";
 import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirm";
 
 
@@ -17,9 +19,12 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/users/activate/:uid/:token" element={<ActivatePage />} />
-            <Route path="/users/reset_password/" element={<ResetPasswordPage />} />
-            <Route path="/users/reset_password_confirm/:uid/:token" element={<ResetPasswordConfirmPage />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/reset_password/:uid/:token" element={<ResetPasswordPage />} />
+            <Route path="/activate/:uid/:token" element={<ActivatePage />} />
+            <Route path="/reset_password/" element={<RequestResetPasswordPage />} />
+            <Route path="/reset_password_confirm/:uid/:token" element={<ResetPasswordConfirmPage />} />
+
           </Routes>
         </BrowserRouter>
       </div>

@@ -1,11 +1,19 @@
-import React from "react";
+import { useParams } from "react-router-dom";
+import Header from "../components/Header";
+import ResetPassword from "../components/ResetPassword";
 
-const ResetPasswordPage = () => {
+export default function ResetPasswordPage() {
+  const { token, uid } = useParams(); 
+
   return (
-    <div>
-      <h1>ResetPassword</h1>
-    </div>
+    <>
+      <Header
+        heading="Redefinir Senha"
+        paragraph="Por favor, digite a nova senha e confirme."
+        linkName="Voltar para o Login"
+        linkUrl="/login"
+      />
+      <ResetPassword token={token} uid={uid} />
+    </>
   );
 }
-
-export default ResetPasswordPage;

@@ -1,83 +1,56 @@
-import { useState, useEffect, ChangeEvent, FormEvent, MouseEvent } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getJWT } from "../environment/api";
 import { loginFields } from "../constants/formFields";
 import Input from "./Input";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 
-const fields = loginFields;
-const fieldsState = {} as { [key: string]: string };
-fields.forEach((field) => (fieldsState[field.id] = ""));
-
 export default function Login() {
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const [loginState, setLoginState] = useState(fieldsState);
-  const history = useNavigate();
-
-  useEffect(() => {
-    // Verificar se há dados salvos no armazenamento local
-    const savedUsername = localStorage.getItem("username");
-    const savedEmail = localStorage.getItem("email")
-
-    // Preencher automaticamente os campos de login se houver dados salvos
-    if (savedUsername && savedEmail) {
-      setLoginState({
-        ...loginState,
-        username: savedUsername,
-        email: savedEmail,
-      });
-    }
-  }, []);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setLoginState({ ...loginState, [e.target.id]: e.target.value });
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  function handleSubmit(e: MouseEvent<HTMLButtonElement | HTMLAnchorElement> | FormEvent<HTMLFormElement>) {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    const access_token = localStorage.getItem("auth-token-acess");
-  
-    const requestInfo = {
-      method: "POST",
-      body: JSON.stringify({
-        username: loginState.username,
-        password: loginState.password,
-      }),
-      headers: new Headers({
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + access_token,
-      }),
-    };
-  
-    fetch("http://localhost:8000/auth/token/", requestInfo)
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        }
-        console.log(response);
-        throw new Error("Login inválido");
-      })
-      .then((token) => {
-        const token_list = JSON.parse(token);
-        localStorage.setItem("auth-token-acess", token_list["access"]);
-        localStorage.setItem("auth-token-refresh", token_list["refresh"]);
-        setLoginState({ ...loginState, errorMessage: "", successMessage: "" });
-      })
-      .catch((error) => {
-        setLoginState({ ...loginState, errorMessage: error.message, successMessage: "" });
-      });
-  }
-  
+    try {
+      const response = await getJWT(loginData);
+      console.log(response);
+
+      // Verificar se a resposta foi bem-sucedida e obter o token de acesso
+      if (response.status === 200) {
+        const { access } = response.data;
+        localStorage.setItem("auth-token-access", access);
+
+        // Redirecionar para a página desejada após o login
+        navigate("/success");
+      } else {
+        // Exibir mensagem de erro caso o login falhe
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fields = loginFields;
 
   return (
-    <form className="mt-8 space-y-6 ">
+    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       <div className="rounded-md shadow-sm -space-y-px">
         {fields.map((field) => (
           <Input
             key={field.id}
             handleChange={handleChange}
-            value={loginState[field.id]}
+            value={loginData[field.name]}
             labelText={field.labelText}
             labelFor={field.labelFor}
             id={field.id}
@@ -94,9 +67,9 @@ export default function Login() {
 
       <FormAction
         handleSubmit={handleSubmit}
-        type="button"
+        type="submit"
         action="submit"
-        text="Login"    
+        text="Login"
       />
     </form>
   );
