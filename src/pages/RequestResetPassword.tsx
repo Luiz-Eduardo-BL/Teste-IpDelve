@@ -8,7 +8,7 @@ export default function RequestResetPasswordPage() {
         heading="Redefinir senha"
         paragraph="Voltar para a página de login? "
         linkName="Login"
-        linkUrl="/login"
+        // linkUrl="/login"
       />
       <ResetPassword token={""} uid={""} />
     </>

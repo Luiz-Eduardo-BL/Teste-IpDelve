@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const token = "Bearer " + localStorage.getItem("token");
 
@@ -117,3 +117,7 @@ export const isVerify = async (uid: any, token: any) => {
   return await postMethod(url, {uid, token});
 };
 
+export const checkEmailExists = async (email: string) => {
+  const url = "http://localhost:8000/auth/check-email/?email=${encodeURIComponent(email)}";
+  return await getMethod(url);
+};
