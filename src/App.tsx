@@ -4,7 +4,6 @@ import HomePage from "./pages/Home";
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
 import ActivatePage from "./pages/Activate";
-import Success from "./pages/Success";
 import DashboardPage from "./pages/Dashboard";
 import ResetPasswordPage from "./pages/ResetPassword";
 import RequestResetPasswordPage from "./pages/RequestResetPassword";
@@ -20,7 +19,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/success" element={<Success />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/reset_password/:uid/:token" element={<ResetPasswordPage />} />
             <Route path="/activate/:uid/:token" element={<ActivatePage />} />

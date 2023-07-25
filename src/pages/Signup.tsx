@@ -8,7 +8,7 @@ export default function SignupPage() {
         heading="Crie sua conta"
         paragraph="Já possui uma conta? "
         linkName="Login"
-        linkUrl="/"
+        linkUrl="/login"
       />
       <Signup />
     </>

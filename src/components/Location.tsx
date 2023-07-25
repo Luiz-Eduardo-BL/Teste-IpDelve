@@ -55,27 +55,30 @@ const LocationList: React.FC = () => {
     const locationsToRender = locations.slice(startIndex, endIndex);
 
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-9">
-        {locationsToRender.map((location) => (
-          <div
-            key={location.id}
-            onClick={() => handleLocationClick(location)}
-            className="w-full h-50 md:h-40 border border-gray-300 rounded-lg p-5 cursor-pointer"
-          >
-            <h2 className="text-xl font-semibold mb-2">Location: {location.name}</h2>
-            <p>Tipo: {location.type}</p>
-            <p>Dimensão: {location.dimension}</p>
-          </div>
-        ))}
+      <div className="flex flex-col items-center">
+        <div className="flex flex-row">
+          {locationsToRender.map((location) => (
+            <div
+              key={location.id}
+              onClick={() => handleLocationClick(location)}
+              className="w-full h-50 md:h-40 border border-gray-300 rounded-lg p-5 cursor-pointer mx-2"
+            >
+              <h2 className="text-xl font-semibold mb-2">Location: {location.name}</h2>
+              <p>Tipo: {location.type}</p>
+              <p>Dimensão: {location.dimension}</p>
+            </div>
+          ))}
+        </div>
       </div>
     );
+    
   };
 
   const renderLocationDetails = () => {
     if (selectedLocation) {
       return (
         <div className="mt-5 w-80%">
-          <div className="border border-gray-300 rounded-lg p-5">
+          <div className="border border-gray-300 rounded-lg p-5 max-h-96 overflow-y-auto">
             <h2 className="text-xl font-semibold mb-2">Location: {selectedLocation.name}</h2>
             <p>Tipo: {selectedLocation.type}</p>
             <p>Dimensão: {selectedLocation.dimension}</p>

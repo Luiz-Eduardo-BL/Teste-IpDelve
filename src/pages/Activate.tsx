@@ -8,7 +8,7 @@ const ActivatePage = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const verifyAccount = async () => {
+    const verificarConta = async () => {
       try {
         const response = await isVerify(uid, token);
         setVerified(true);
@@ -19,7 +19,7 @@ const ActivatePage = () => {
       }
     };
 
-    verifyAccount();
+    verificarConta();
   }, [uid, token]);
 
   if (verified) {
@@ -27,13 +27,20 @@ const ActivatePage = () => {
   }
 
   if (error) {
-    return <div>Error occurred while activating account.</div>;
+    return (
+      <div className="container">
+        <div className="d-flex flex-column justify-content-center align-items-center" style={{ marginTop: '200px' }}>
+          <h1>Ocorreu um erro ao ativar a conta.</h1>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container">
       <div className="d-flex flex-column justify-content-center align-items-center" style={{ marginTop: '200px' }}>
-        <h1>Verify your Account:</h1>
+        <h1>Verificando sua Conta...</h1>
+        <p>Por favor, aguarde enquanto sua conta está sendo ativada.</p>
       </div>
     </div>
   );

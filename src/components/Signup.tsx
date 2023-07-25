@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { createUser } from "../environment/api";
 import { signupFields } from "../constants/formFields";
 import Input from "./Input";
 import FormAction from "./FormAction";
-import FormExtra from "./FormExtra";
 
 export default function Signup() {
   const [userData, setUserData] = useState({
@@ -23,12 +24,46 @@ export default function Signup() {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
+    for (const field of signupFields) {
+      if (field.isRequired && !userData[field.name]) {
+        toast.error(`Preencha o campo "${field.labelText}"`, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+        return;
+      }
+    }
+
+    if (userData.password !== userData.re_password) {
+      toast.error("As senhas não coincidem", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+      return;
+    }
+
     try {
       const response = await createUser(userData);
       console.log(response);
+      toast.success("Usuário criado com sucesso! Agora você pode fazer o login.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
       navigate("/login");
     } catch (error) {
       console.log(error);
+      toast.error("Erro ao criar o usuário. Por favor, tente novamente.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
     }
   };
 
@@ -43,6 +78,7 @@ export default function Signup() {
 
   return (
     <form className="mt-8 space-y-6">
+      <ToastContainer />
       <div className="rounded-md shadow-sm -space-y-px">
         {fields.map((field) => (
           <Input
@@ -61,13 +97,11 @@ export default function Signup() {
         ))}
       </div>
 
-      <FormExtra />
-
       <FormAction
         handleSubmit={handleSubmit}
         type="button"
         action="submit"
-        text="Signup"
+        text="Cadastrar"
       />
     </form>
   );
