@@ -8,27 +8,25 @@ import DashboardPage from "./pages/Dashboard";
 import ResetPasswordPage from "./pages/ResetPassword";
 import RequestResetPasswordPage from "./pages/RequestResetPassword";
 import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirm";
+import TravelPage from "./pages/Travel";
 
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="w-full max-w-md px-4">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/reset_password/:uid/:token" element={<ResetPasswordPage />} />
-            <Route path="/activate/:uid/:token" element={<ActivatePage />} />
-            <Route path="/reset_password/" element={<RequestResetPasswordPage />} />
-            <Route path="/reset_password_confirm/:uid/:token" element={<ResetPasswordConfirmPage />} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/reset_password/:uid/:token" element={<ResetPasswordPage />} />
+        <Route path="/activate/:uid/:token" element={<ActivatePage />} />
+        <Route path="/travel" element={<TravelPage />} />
+        <Route path="/reset_password/" element={<RequestResetPasswordPage />} />
+        <Route path="/reset_password_confirm/:uid/:token" element={<ResetPasswordConfirmPage />} />
 
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </div>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -9,13 +9,3 @@ class UserCreateSerializer(UserCreateSerializer):
   class Meta(UserCreateSerializer.Meta):
     model = User
     fields = ('id', 'email', 'first_name', 'last_name', 'password')
-
-# class TravelPlanSerializer(serializers.ModelSerializer):
-#   class Meta:
-#     model = TravelPlan
-#     fields = '__all__'
-
-# class UserSerializer(serializers.ModelSerializer):
-#   class Meta:
-#     model = User
-#     fields = '__all__'

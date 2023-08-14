@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { createUser } from "../environment/api";
-import { signupFields } from "../constants/formFields";
-import Input from "./Input";
-import FormAction from "./FormAction";
+import { createUser } from "../../environment/api";
+import { signupFields } from "../../constants/formFields";
+import Input from "../Forms/Input";
+import FormAction from "../Forms/FormAction";
 
 export default function Signup() {
   const [userData, setUserData] = useState({

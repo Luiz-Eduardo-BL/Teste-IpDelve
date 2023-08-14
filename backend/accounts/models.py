@@ -33,19 +33,3 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
   def __str__(self):
     return self.email
-
-# class TravelPlan(models.Model):
-#   user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
-#   travel_stops = models.ManyToManyField('TravelStop', related_name='travel_stops')
-#   is_active = models.BooleanField(default=True) 
-
-#   def __str__(self):
-#     return self.user.name
-
-# class TravelStop(models.Model):
-#   name = models.CharField(max_length=255)
-#   address = models.CharField(max_length=255)
-#   description = models.TextField()
-
-#   def __str__(self):
-#     return self.name

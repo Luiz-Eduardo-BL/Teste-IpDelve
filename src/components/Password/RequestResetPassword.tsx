@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { requestNewPassword } from "../environment/api";
-import Input from "./Input";
-import FormAction from "./FormAction";
+import { requestNewPassword } from "../../environment/api";
+import Input from "../Forms/Input";
+import FormAction from "../Forms/FormAction";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 

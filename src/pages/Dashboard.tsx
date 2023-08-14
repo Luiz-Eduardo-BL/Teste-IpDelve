@@ -1,24 +1,62 @@
-import LocationList from "../components/Location";
-import Logout from "../components/Logout";
+import { useState, useEffect } from "react";
 
-const Header = () => {
-  return (
-    <div className="flex justify-between items-center w-full text-white px-4">
-      <h1 className="text-2xl font-semibold px-10">Dashboard</h1>
-      <div>
-        <Logout />
-      </div>
-    </div>
-  );
-};
+import Card from "../components/Card/Card";
+import Search from "../components/Search/Search";
+import Pagination from "../components/Pagination/Pagination";
+import NavbarWithSearch from "../components/Headers/Navbar";
 
-export default function DashboardPage() {
+const Dashboard = () => {
+  const [pageNumber, updatePageNumber] = useState(1);
+  const [status, updateStatus] = useState("");
+  const [gender, updateGender] = useState("");
+  const [species, updateSpecies] = useState("");
+  const [fetchedData, updateFetchedData] = useState({
+    info: {}, 
+    results: [], 
+  });
+  const [search, setSearch] = useState("");
+  const { info, results } = fetchedData;
+
+  const api = `https://rickandmortyapi.com/api/location/?page=${pageNumber}&name=${search}&status=${status}&gender=${gender}&species=${species}`;
+
+  useEffect(() => {
+    (async function () {
+      const data = await fetch(api).then((res) => res.json());
+      updateFetchedData(data);
+    })();
+  }, [api]);
+
   return (
-    <div className="flex flex-col items-center">
-      <Header />
-      <div className="flex-grow overflow-x-auto mt-4">
-        <LocationList />
+    <div className="Dashboard">
+      <NavbarWithSearch />
+      <Search setSearch={setSearch} updatePageNumber={updatePageNumber} />
+      <div className="flex justify-center items-center mt-4">
+        <div className="container mx-auto sm:px-4">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+            <div className="md:col-span-2">
+              <div className="flex flex-col space-y-4">
+                {results.slice(0, 3).map((result) => (
+                  <Card key={result.id} page="/" results={[result]} />
+                ))}
+              </div>
+            </div>
+            <div className="md:col-span-2">
+              <div className="flex flex-col space-y-4">
+                {results.slice(3).map((result) => (
+                  <Card key={result.id} page="/" results={[result]} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <Pagination
+        info={info}
+        pageNumber={pageNumber}
+        updatePageNumber={updatePageNumber}
+      />
     </div>
   );
 }
+
+export default Dashboard;

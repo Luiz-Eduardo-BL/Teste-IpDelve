@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getJWT } from "../environment/api";
-import { loginFields } from "../constants/formFields";
-import Input from "./Input";
-import FormAction from "./FormAction";
-import FormExtra from "./FormExtra";
+import { accessToken } from "../../environment/api";
+import { loginFields } from "../../constants/formFields";
+import Input from "../Forms/Input";
+import FormAction from "../Forms/FormAction";
+import FormExtra from "../Forms/FormExtra";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -26,7 +26,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await getJWT(loginData);
+      const response = await accessToken(loginData);
       console.log(response);
 
       if (response.status === 200) {
@@ -92,7 +92,6 @@ export default function Login() {
 
         <FormAction handleSubmit={handleSubmit} type="submit" action="submit" text="Login" />
       </form>
-
       <ToastContainer />
     </>
   );

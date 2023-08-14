@@ -121,3 +121,13 @@ export const checkEmailExists = async (email: string) => {
   const url = "http://localhost:8000/auth/check-email/?email=${encodeURIComponent(email)}";
   return await getMethod(url);
 };
+
+export const accessToken = async (loginData: any) => {
+  const url = "http://localhost:8000/auth/token/";
+  return await postMethod(url, loginData);
+}
+
+export const logout = async () => {
+  const url = "http://localhost:8000/auth/token/logout/";
+  return await postMethod(url, {});
+}

@@ -28,19 +28,23 @@ const ActivatePage = () => {
 
   if (error) {
     return (
-      <div className="container">
-        <div className="d-flex flex-column justify-content-center align-items-center" style={{ marginTop: '200px' }}>
-          <h1>Ocorreu um erro ao ativar a conta.</h1>
+      <div className="flex h-screen justify-center items-center">
+        <div className="container">
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            <h1>Ocorreu um erro ao ativar a conta.</h1>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="container">
-      <div className="d-flex flex-column justify-content-center align-items-center" style={{ marginTop: '200px' }}>
-        <h1>Verificando sua Conta...</h1>
-        <p>Por favor, aguarde enquanto sua conta está sendo ativada.</p>
+    <div className="flex h-screen justify-center items-center">
+      <div className="container">
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          <h1>Verificando sua Conta...</h1>
+          <p>Por favor, aguarde enquanto sua conta está sendo ativada.</p>
+        </div>
       </div>
     </div>
   );

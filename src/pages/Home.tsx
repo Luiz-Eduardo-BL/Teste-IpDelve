@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const HomePage = () => (
-  <div className="container mx-auto mt-5">
+  <div className="flex h-screen justify-center items-center">
     <div className="bg-white shadow-md rounded-lg p-8 text-black">
       <h1 className="text-4xl font-bold mb-4">Bem Vindo!</h1>
       <p className="text-xl mb-6">
