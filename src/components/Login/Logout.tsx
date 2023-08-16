@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Typography, Button } from "@material-tailwind/react";
 
 const Logout = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -23,31 +24,31 @@ const Logout = () => {
   };
 
   return (
-    <div className="items-center">
-      <button
-        className="bg-red-500 text-white px-4 py-2 rounded-md"
+    <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+      <Button
+        className="bg-red-500 text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
         onClick={() => setShowConfirmation(true)}
       >
         Sair
-      </button>
+      </Button>
 
       {showConfirmation && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-8 text-black rounded-lg">
             <p>Deseja realmente sair?</p>
             <div className="flex justify-end mt-4">
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded-md mr-2"
+            <Button
+                className="bg-blue-500 text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
                 onClick={() => setShowConfirmation(false)}
               >
                 Cancelar
-              </button>
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              </Button>
+              <Button
+                className="bg-red-500 text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
                 onClick={handleLogout}
               >
                 Sair
-              </button>
+              </Button>
             </div>
           </div>
         </div>

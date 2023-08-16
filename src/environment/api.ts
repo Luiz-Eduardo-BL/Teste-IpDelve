@@ -131,3 +131,18 @@ export const logout = async () => {
   const url = "http://localhost:8000/auth/token/logout/";
   return await postMethod(url, {});
 }
+
+export const getTravelsApi = async () => {
+  const url = "http://localhost:8000/travel/";
+  return await getMethod(url);
+}
+
+export const getTravelApi = async (id: number) => {
+  const url = `http://localhost:8000/travel/${id}/`;
+  return await getMethod(url);
+}
+
+export const createTravelApi = async (travelData: any) => {
+  const url = "http://localhost:8000/travel/";
+  return await postMethod(url, travelData);
+}

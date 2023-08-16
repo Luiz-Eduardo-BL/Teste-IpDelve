@@ -7,18 +7,18 @@ export default function NavbarWithSearch() {
   return (
     <Navbar color="blue-gray">
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-          <Typography
-            color="white"
-            href="#"
-            ripple="light"
-            className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-          >
-            Rick and Morty
-          </Typography>
+        <div className="w-full relative flex justify-between items-center lg:w-auto lg:static lg:block lg:justify-start">
+          <Link to="/dashboard">
+            <Typography
+              color="white"
+              ripple="light"
+              className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+            >
+              Rick and Morty
+            </Typography>
+          </Link>
           <Link to="/history"> 
             <Button
-              color="transparent"
               className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
             >
               Historico
@@ -26,19 +26,14 @@ export default function NavbarWithSearch() {
           </Link>
           <Link to="/travel">
             <Button
-              color="transparent"
               className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
             >
               Viagens
             </Button>
           </Link>
-          <Button
-            color="transparent"
-            href="#"
-            className="text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-          >
+          <div className="flex justify-center mt-2 mb-2">
             <Logout />
-          </Button>
+          </div>
         </div>
       </div>
     </Navbar>

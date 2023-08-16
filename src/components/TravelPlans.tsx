@@ -1,5 +1,3 @@
-// contem os seguintes campos, partida, paradas e chegada onde elas consultam as locations de rickMortyApi.ts e mostra as opçoes usando o react-select
-
 import { useState } from 'react';
 import Select from 'react-select';
 import { getTravelLocations } from '../environment/rickMortyApi';

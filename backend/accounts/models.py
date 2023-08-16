@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth import get_user_model
 
 class UserAccountManager(BaseUserManager):
   def create_user(self, email, name, password=None):
@@ -33,3 +34,15 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
   def __str__(self):
     return self.email
+
+User = get_user_model()
+
+class Travel(models.Model):
+  start_location_id = models.CharField(max_length=255)
+  end_location_id = models.CharField(max_length=255)
+  stops_locations_ids = models.CharField(max_length=255)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  created_at = models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+    return self.start_location_id + ' - ' + self.end_location_id
